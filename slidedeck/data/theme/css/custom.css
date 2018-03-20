@@ -20,6 +20,10 @@ strong {
   font-weight: bold;
 }
 
+.two-images img{
+    max-width: 49%;
+}
+
 slides footer.source {
  font-size: 16pt
  position: absolute;
@@ -45,11 +49,11 @@ slide.title-slide {
 }
 
 body {
-     font-family: AcuminPro-regular !important;
+     font-family: Acumin Pro !important;
 }
 
 slides > slide {
-   font-family: AcuminPro-regular !important;
+   font-family: Acumin Pro !important;
 }
 
 slide:not(.segue) {
@@ -88,13 +92,13 @@ slides > slide.dark {
 }
 
 h1 {
-    font-family: Industry-Bold;
+    font-family: Industry;
     text-transform: uppercase;
     line-height: 1 !important;
 }
 
 h2 {
-    font-family: Industry-Medium;
+    font-family: Industry;
     line-height: 1 !important;
     color: #425052;
 }
@@ -159,7 +163,7 @@ pre[data-lang]:after {
     background-color: #DCDCDC;
     color: #53504F;
     font-size: 90%;
-    font-family: Industry-medium;
+    font-family: Industry;
 }
 
 slides footer.source {
