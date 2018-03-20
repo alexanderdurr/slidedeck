@@ -74,6 +74,7 @@ library(knitr); knit('slides.Rmd')
 
 ![example-0](examples/example-0.png)
 ![example-1](examples/example-1.png)
+![example-2](examples/example-1.png)
 
 
 ## License
