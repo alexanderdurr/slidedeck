@@ -38,12 +38,18 @@ Create a new project, complete with some template slides, the css, and the javas
 $ slidedeck create my_slides
 ```
 
+Use the `kth` or `wasp` template.
+
+```
+$ SLIDEDECK_TEMPLATE=kth slidedeck create my_slides
+$ SLIDEDECK_TEMPLATE=wasp slidedeck create my_slides
+```
+
 Look in there for the `slides.md` file, and edit it to your liking. When you want to see your work, compile the slides from markdown into HTML.
 
 ```
 $ slidedeck render
 ```
-
 
 You can also have the HTML *auto-compiled* from markdown, any time the files change on disk.
 ```
@@ -76,6 +82,9 @@ library(knitr); knit('slides.Rmd')
 ![example-1](examples/example-1.png)
 ![example-2](examples/example-2.png)
 
+![example-0](examples/kth_template-0.png)
+![example-1](examples/kth_template-1.png)
+![example-2](exampleskth_template-2.png)
 
 ## License
 

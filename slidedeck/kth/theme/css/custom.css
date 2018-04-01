@@ -1,0 +1,193 @@
+slide.img-top-center img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+slide .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+em, i  {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+slides footer.source {
+ font-size: 16pt
+ position: absolute;
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+/*    background: url(../../images/google_developers_icon_128.png) no-repeat 0 50%;*/
+    -webkit-background-size: 30px 30px;
+    -moz-background-size: 30px 30px;
+    -o-background-size: 30px 30px;
+    background-size: 30px 30px;
+    padding-left: 40px;
+    height: 30px;
+    line-height: 1.9;
+}
+
+pre b {
+    font-weight: normal;
+}
+
+body {
+     font-family: Arial !important;
+}
+
+slides > slide {
+   font-family: Arial !important;
+   color: black;
+   padding: 40px 150px;
+}
+
+slide:not(.segue) {
+    background-image: url(../../figures/enfargat_element_platta_RGB.svg);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    /*background-size: 100% 10%;*/
+}
+
+slide::before {
+    font-size: 10pt;
+    content: attr(data-footer-fields) attr(data-slide-num) "/" attr(data-total-slides);
+    position: absolute;
+    bottom: 14px;
+    left: 40px;
+    line-height: 1.9;
+    color: white;
+}
+
+slide::after {
+    font-size: 10pt;
+    content: "" !important;
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    background: url(../../figures/KTH_Logotyp_RGB_2013.svg) no-repeat 0 50%;
+    -moz-background-size: 64px 64px;
+    -o-background-size: 64px 64px;
+    -webkit-background-size: 64px 64px;
+    background-size: 64px 64px;
+    padding-left: 68px;
+    height: 68px;
+    line-height: 1.9;
+}
+
+slides > slide.dark {
+    background: #425052 !important;
+}
+
+.segue, slides > slide.dark {
+    background: url(../../figures/enfargat_element_linjer_RGB.svg) left bottom no-repeat !important;
+/*    background-size: 100% 50% !important;*/
+}
+
+h1 {
+    font-family: Arial;
+    line-height: 1 !important;
+    color: black !important;
+}
+
+h2 {
+    font-family: Arial;
+    line-height: 1 !important;
+    color: black !important;
+}
+
+h3 {
+    line-height: 1 !important;
+    color: black !important;
+}
+
+.title-slide hgroup h1 {
+    font-size: 55px;
+    line-height: 1;
+    color: white;
+}
+
+.title-slide hgroup h2 {
+    color: #b3bebd;
+}
+
+.title-slide hgroup p {
+    font-size: 28px;
+    color: black;
+    line-height: 1.3;
+    margin-top: 2em;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+article.acks img {
+
+    max-height: 100px;
+    padding: 20px;
+    /* max-width: 25%; */
+    position: relative;
+    top: 100px;
+}
+
+
+
+.title-slide hgroup {
+    top: 160px;
+    left: 260px;
+    position: absolute;
+}
+
+.segue hgroup {
+    top: 160px;
+    left: 260px;
+    position: absolute;
+}
+
+
+.segue {
+    padding: 60px 40px !important;
+}
+
+pre {
+    font-size: 16px;
+    line-height: 16px;
+    left: -160px;
+    width: 130%;
+}
+
+pre[data-lang]:after {
+    -webkit-border-top-right-radius: 8px;
+    -moz-border-radius-topright: 8px;
+    border-top-right-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    -moz-border-radius-bottomleft: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: #DCDCDC;
+    color: #53504F;
+    font-size: 90%;
+    font-family: Industry-medium;
+}
+
+slides footer.source {
+    font-size: 16pt position: absolute;
+    position: absolute;
+    bottom: 12%;
+    left: 20px;
+    /* background: url(../../images/google_developers_icon_128.png) no-repeat 0 50%; */
+    -webkit-background-size: 30px 30px;
+    -moz-background-size: 30px 30px;
+    -o-background-size: 30px 30px;
+    background-size: 30px 30px;
+    padding-left: 40px;
+    height: 30px;
+    line-height: 1;
+}

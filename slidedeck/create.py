@@ -8,6 +8,9 @@ TEMPLATE_VARIABLE = 'SLIDEDECK_TEMPLATE'
 
 
 def curdir(directory):
+    if directory is None:
+        return None
+
     return os.path.abspath(os.path.join(os.path.dirname(__file__), directory))
 
 
@@ -15,7 +18,8 @@ def check_env():
     '''
         Check the current user's environment to return important settings
     '''
-    sd_template = os.environ.get(TEMPLATE_VARIABLE, None) or curdir('data')
+    sd_template = curdir(os.environ.get(TEMPLATE_VARIABLE, None)) or curdir('data')
+    print curdir('data')
     return {'template_dir': sd_template}
 
 
@@ -31,7 +35,7 @@ def create_project(directory, template=None):
 
     if not os.path.exists(template):
         raise OSError("Template directory '%s' does not exist" % template)
-    
+
     def callback(src, names):
         base = os.path.relpath(src, template)
         for name in names:

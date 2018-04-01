@@ -41,9 +41,17 @@ setup(
     packages=find_packages(),
     entry_points={'console_scripts': ['slidedeck=slidedeck.scripts.slidedeck:main']},
     platforms = ["Linux", "Mac OS-X", "Unix"],
-    package_data={'slidedeck': ['data/base.html', 'data/slides.md',
-                    'data/js/*.js', 'data/js/*/*.js', 'data/theme/*/*',
-                    'data/figures/*']},
+    package_data={'slidedeck': [
+        'data/base.html', 'data/slides.md',
+        'data/js/*.js', 'data/js/*/*.js', 'data/theme/*/*',
+        'data/figures/*',
+        'kth/base.html', 'kth/slides.md',
+        'kth/js/*.js', 'kth/js/*/*.js', 'kth/theme/*/*',
+        'kth/figures/*',
+        'wasp/base.html', 'wasp/slides.md',
+        'wasp/js/*.js', 'wasp/js/*/*.js', 'wasp/theme/*/*',
+        'wasp/figures/*'
+        ]},
     zip_safe=False,
     install_requires=['jinja2', 'markdown', 'watchdog'],
 )

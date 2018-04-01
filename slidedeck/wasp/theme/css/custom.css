@@ -1,0 +1,233 @@
+slide.img-top-center img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+slide .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+em, i  {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.two-images img{
+    max-width: 49%;
+}
+
+.three-images img{
+    max-width: 32%;
+}
+
+span.codesnippet, code {
+    font-family: 'Source Code Pro', 'Courier New', monospace;
+    font-size: 90%;
+    background-color: #f1f3f3;
+    color: #e83278;
+    margin: 6px 0px;
+    border-radius: 4px;
+    padding: 0px 4px;
+}
+
+a  {
+    color: #1a8dad !important;
+    border-bottom: 0px solid rgba(42, 124, 223, 0.5) !important;
+}
+
+a:hover {
+    color: #1a8dad !important;
+    border-bottom: 1px solid #1a8dad !important;
+}
+
+
+slides footer.source {
+ font-size: 16pt
+ position: absolute;
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+/*    background: url(../../images/google_developers_icon_128.png) no-repeat 0 50%;*/
+    -webkit-background-size: 30px 30px;
+    -moz-background-size: 30px 30px;
+    -o-background-size: 30px 30px;
+    background-size: 30px 30px;
+    padding-left: 40px;
+    height: 30px;
+    line-height: 1.9;
+}
+
+pre b {
+    font-weight: normal;
+}
+
+slide.title-slide {
+    background-color: #425052 !important;
+}
+
+body {
+     font-family: Acumin Pro !important;
+}
+
+slides > slide {
+   font-family: Acumin Pro !important;
+}
+
+slide:not(.segue) {
+    background-image: url(../../figures/wasp_bg.svg);
+    background-repeat: repeat-x;
+    background-position-y: 100%;
+    background-size: 10% 10%;
+}
+
+
+
+slide::after {
+    bottom: -21px !important;
+    left: 0px !important;
+    padding-left: 40px;
+    background-image: url(../../figures/wasp_white.svg);
+    background-size: 300px;
+    background-repeat: no-repeat;
+    background-position-y: 0%;
+    background-position-x: 90%;
+    width: 100%;
+    height: 10%;
+}
+
+slides > slide.dark {
+    background: #425052 !important;
+}
+
+.segue, slides > slide.dark {
+    background-color: #425052 !important;
+    background-image: url(../../figures/wasp_white.svg) !important;
+    background-size: 350px !important;
+    background-repeat: no-repeat !important;
+    background-position-y: 90% !important;
+    background-position-x: 40px !important;
+}
+
+h1 {
+    font-family: Industry;
+    text-transform: uppercase;
+    line-height: 1 !important;
+}
+
+h2 {
+    font-family: Industry;
+    line-height: 1 !important;
+    color: #425052;
+}
+
+h3 {
+    line-height: 1 !important;
+}
+
+.title-slide hgroup h1 {
+    font-size: 55px;
+    line-height: 1;
+    color: white;
+}
+
+.title-slide hgroup h2 {
+    color: #b3bebd;
+}
+
+.title-slide hgroup p {
+    font-size: 28px;
+    color: #b3bebd;
+    line-height: 1.3;
+    margin-top: 2em;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+article.acks img {
+
+    max-height: 100px;
+    padding: 20px;
+    /* max-width: 25%; */
+    position: relative;
+    top: 100px;
+}
+
+
+
+.title-slide hgroup {
+    bottom: 200px;
+}
+
+.segue {
+    padding: 60px 40px !important;
+}
+
+pre {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.columns-2 img {
+    max-height: 470px;
+}
+
+article {
+    max-height: 480px;
+}
+
+slides > slide > hgroup + article {
+    margin-top: 25px;
+}
+
+.thank-you-slide > p {
+    position: absolute;
+    right: 80px;
+    font-size: 24pt;
+    line-height: 1;
+    bottom: 55px;
+}
+
+pre[data-lang]:after {
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    border-top-right-radius: 0px;
+    -webkit-border-bottom-left-radius: 8px;
+    -moz-border-radius-bottomleft: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: #f1f3f3;
+    color: #53504F;
+    font-size: 90%;
+    font-family: Industry;
+}
+
+slides footer.source {
+    font-size: 16pt position: absolute;
+    position: absolute;
+    bottom: 12%;
+    left: 20px;
+    /* background: url(../../images/google_developers_icon_128.png) no-repeat 0 50%; */
+    -webkit-background-size: 30px 30px;
+    -moz-background-size: 30px 30px;
+    -o-background-size: 30px 30px;
+    background-size: 30px 30px;
+    padding-left: 40px;
+    height: 30px;
+    line-height: 1;
+}
+
+.checklist input {
+    zoom: 2;
+}
+
+.checklist ul > li {
+  list-style-type: none;
+}
