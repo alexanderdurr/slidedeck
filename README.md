@@ -2,7 +2,11 @@
 
 ## Overview
 
-This is a fork from [rmcgibbo/slidedeck](https://github.com/rmcgibbo/slidedeck) adapted with a ![WASP](http://www.wasp-sweden.se) template.
+This is a fork from [rmcgibbo/slidedeck](https://github.com/rmcgibbo/slidedeck) adapted with a ![WASP](http://www.wasp-sweden.se) and a [KTH](https://www.kth.se/) template.
+
+Default  | WASP                                 |  KTH
+|:------:|:-----------------------------------:|:-------------------------:
+![example-0](examples/default-0.png) | ![example-0](examples/example-0.png) | ![example-0](examples/kth_template-0.png)
 
 This is in turn a repackaging of the google io 2012 slidedeck, with [some](https://github.com/francescolaffi/elastic-google-io-slides) modifications, to be a little easier to use and more suitable for scientific presentations.
 
@@ -68,7 +72,7 @@ $ slidedeck create -h
 
 `slidedeck watch` works nicely with the [tincr](http://tin.cr/) extension for
 chrome, which will refresh your browser every time the html files its serving
-are changed on disk.  
+are changed on disk.
 
 Use `knitr` to compile RMarkdown to Markdown before rendering.
 
@@ -78,13 +82,11 @@ library(knitr); knit('slides.Rmd')
 
 ## Examples
 
-![example-0](examples/example-0.png)
-![example-1](examples/example-1.png)
-![example-2](examples/example-2.png)
-
-![example-0](examples/kth_template-0.png)
-![example-1](examples/kth_template-1.png)
-![example-2](examples/kth_template-2.png)
+WASP                                 |  KTH
+:-----------------------------------:|:-------------------------:
+![example-0](examples/example-0.png) | ![example-0](examples/kth_template-0.png)
+![example-0](examples/example-1.png) | ![example-0](examples/kth_template-1.png)
+![example-0](examples/example-2.png) | ![example-0](examples/kth_template-2.png)
 
 ## License
 
