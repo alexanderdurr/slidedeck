@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a fork from [rmcgibbo/slidedeck](https://github.com/rmcgibbo/slidedeck) adapted with a ![WASP](http://www.wasp-sweden.se) and a [KTH](https://www.kth.se/) template.
+This is a fork from [rmcgibbo/slidedeck](https://github.com/rmcgibbo/slidedeck) adapted with a [WASP](http://www.wasp-sweden.se) and a [KTH](https://www.kth.se/) template.
 
 Default  | WASP                                 |  KTH
 |:------:|:-----------------------------------:|:-------------------------:
@@ -82,11 +82,11 @@ library(knitr); knit('slides.Rmd')
 
 ## Examples
 
-WASP                                 |  KTH
-:-----------------------------------:|:-------------------------:
-![example-0](examples/example-0.png) | ![example-0](examples/kth_template-0.png)
-![example-0](examples/example-1.png) | ![example-0](examples/kth_template-1.png)
-![example-0](examples/example-2.png) | ![example-0](examples/kth_template-2.png)
+Default  | WASP                                 |  KTH
+|:------:|:-----------------------------------:|:-------------------------:
+![example-0](examples/default-0.png) | ![example-0](examples/example-0.png) | ![example-0](examples/kth_template-0.png)
+![example-1](examples/default-1.png) | ![example-0](examples/example-1.png) | ![example-0](examples/kth_template-1.png)
+![example-2](examples/default-2.png) | ![example-0](examples/example-2.png) | ![example-0](examples/kth_template-2.png)
 
 ## License
 
