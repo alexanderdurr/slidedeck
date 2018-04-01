@@ -84,7 +84,7 @@ library(knitr); knit('slides.Rmd')
 
 ![example-0](examples/kth_template-0.png)
 ![example-1](examples/kth_template-1.png)
-![example-2](exampleskth_template-2.png)
+![example-2](examples/kth_template-2.png)
 
 ## License
 
