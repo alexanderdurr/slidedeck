@@ -30,10 +30,10 @@ We've made a few changes:
 
 ## Getting started
 
-`slidedeck` can be installed with `pip`, but you won't get the WASP template that way. Clone and install with `python`.
+The official `slidedeck` can be installed with `pip`, but you won't get the WASP template that way. 
 
 ```
-$ python setup.py install
+$ pip install git+https://github.com/martisak/slidedeck.git
 ```
 
 Create a new project, complete with some template slides, the css, and the javascript.

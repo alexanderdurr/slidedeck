@@ -19,7 +19,7 @@ def check_env():
         Check the current user's environment to return important settings
     '''
     sd_template = curdir(os.environ.get(TEMPLATE_VARIABLE, None)) or curdir('data')
-    print curdir('data')
+    print(curdir('data'))
     return {'template_dir': sd_template}
 
 
