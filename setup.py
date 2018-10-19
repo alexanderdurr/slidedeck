@@ -53,5 +53,5 @@ setup(
         'wasp/figures/*'
         ]},
     zip_safe=False,
-    install_requires=['jinja2', 'markdown', 'watchdog'],
+    install_requires=['jinja2', 'markdown', 'watchdog', 'bibtexparser'],
 )
