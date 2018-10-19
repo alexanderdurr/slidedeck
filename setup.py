@@ -37,10 +37,11 @@ setup(
     url='https://github.com/martisak/slidedeck',
     description=DOCLINES[0],
     long_description="\n".join(DOCLINES[2:]),
-    classifiers = CLASSIFIERS.splitlines(),
+    classifiers=CLASSIFIERS.splitlines(),
     packages=find_packages(),
-    entry_points={'console_scripts': ['slidedeck=slidedeck.scripts.slidedeck:main']},
-    platforms = ["Linux", "Mac OS-X", "Unix"],
+    entry_points={'console_scripts': [
+        'slidedeck=slidedeck.scripts.slidedeck:main']},
+    platforms=["Linux", "Mac OS-X", "Unix"],
     package_data={'slidedeck': [
         'data/base.html', 'data/slides.md',
         'data/js/*.js', 'data/js/*/*.js', 'data/theme/*/*',
@@ -51,7 +52,7 @@ setup(
         'wasp/base.html', 'wasp/slides.md',
         'wasp/js/*.js', 'wasp/js/*/*.js', 'wasp/theme/*/*',
         'wasp/figures/*'
-        ]},
+    ]},
     zip_safe=False,
-    install_requires=['jinja2', 'markdown', 'watchdog', 'bibtexparser'],
+    install_requires=['jinja2', 'markdown', 'watchdog', 'bibtexparser', 'six'],
 )
