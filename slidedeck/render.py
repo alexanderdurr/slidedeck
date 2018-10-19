@@ -8,6 +8,7 @@ import re
 import jinja2
 import markdown
 from slidedeck.mdx_mathjax import MathJaxExtension
+from slidedeck.mdx_bibtex import BibtexExtension
 
 #############################################################################
 # Globals
@@ -23,14 +24,14 @@ from slidedeck.mdx_mathjax import MathJaxExtension
 #
 # Will be detected.
 DECK_SETTINGS_RE = {
-    'thankyou': u'^%\s*thankyou:(.*)$',
-    'thankyou_details': u'^%\s*thankyou_details:(.*)$',
-    'title': u'^%\s*title:(.*)$',
-    'subtitle': u'^%\s*subtitle:(.*)$',
-    'author': u'^%\s*author:(.*)$',
-    'contact': u'^%\s*contact:(.*)$',
-    'favicon': u'^%\s*favicon:(.*)$',
-
+    'thankyou': u'^%\s*thankyou:\s*(.*)$',
+    'thankyou_details': u'^%\s*thankyou_details:\s*(.*)$',
+    'title': u'^%\s*title:\s*(.*)$',
+    'subtitle': u'^%\s*subtitle:\s*(.*)$',
+    'author': u'^%\s*author:\s*(.*)$',
+    'contact': u'^%\s*contact:\s*(.*)$',
+    'favicon': u'^%\s*favicon:\s*(.*)$',
+    'bibliography': u'^%\s*bibliography:\s*(.*)$'
 }
 
 #############################################################################
@@ -43,7 +44,7 @@ def render_slides(md, template_fn):
     md, settings = parse_deck_settings(md)
     md_slides = md.split('\n---\n')
     print("Compiled {:d} slides.".format(len(md_slides)))
-
+    print(settings)
     slides = []
     # Process each slide separately.
     for md_slide in md_slides:
@@ -56,8 +57,19 @@ def render_slides(md, template_fn):
         slide.update(metadata)
         remainder_index = metadata and 1 or 0
         # Get the content from the rest of the slide.
+        extensions = [MathJaxExtension(),
+                      'markdown.extensions.fenced_code',
+                      'markdown.extensions.meta']
+
+        # Bibfile
+        bibfile = settings.get('bibliography', None)
+        if bibfile:
+            extensions.append(
+                BibtexExtension(bibliography=bibfile))
+
         content_section = '\n\n'.join(sections[remainder_index:])
-        html = markdown.markdown(content_section, extensions=[MathJaxExtension()])
+        html = markdown.markdown(content_section,
+                                 extensions=extensions)
         slide['content'] = postprocess_html(html, metadata)
 
         slides.append(slide)
@@ -73,7 +85,8 @@ def write_slides(slidestring, output_fn):
 
 def process_slides(markdown_fn, output_fn, template_fn):
     if not os.path.exists(markdown_fn):
-        raise OSError('The markdown file "%s" could not be found.' % markdown_fn)
+        raise OSError('The markdown file "%s" could not be found.' %
+                      markdown_fn)
     md = codecs.open(markdown_fn, encoding='utf8').read()
 
     # Check for Dos\Windows line encoding \r\n and convert to unix style \n
@@ -82,7 +95,6 @@ def process_slides(markdown_fn, output_fn, template_fn):
 
     slides = render_slides(md, template_fn)
     write_slides(slides, output_fn)
-
 
 
 def parse_deck_settings(md):
@@ -119,7 +131,8 @@ def parse_deck_settings(md):
     # in between.
     settings = {k: '<br/>'.join(v) for k, v in settings.items()}
 
-    print("Parsed slide deck settings, and found setting for: {:s}.".format(', '.join(settings.keys())))
+    print("Parsed slide deck settings, and found setting for: {:s}.".format(
+        ', '.join(settings.keys())))
     # strip off the newline characters at the beginning and end of the document
     # that might have been left
     md = md.strip()
@@ -145,4 +158,6 @@ def postprocess_html(html, metadata):
     if metadata.get('build_lists') and metadata['build_lists'] == 'true':
         html = html.replace('<ul>', '<ul class="build">')
         html = html.replace('<ol>', '<ol class="build">')
+
+    # html = html.replace('<code>', '<pre>')
     return html

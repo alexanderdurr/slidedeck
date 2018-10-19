@@ -70,10 +70,6 @@ $ slidedeck create -h
 
 ## Tricks
 
-`slidedeck watch` works nicely with the [tincr](http://tin.cr/) extension for
-chrome, which will refresh your browser every time the html files its serving
-are changed on disk.
-
 Use `knitr` to compile RMarkdown to Markdown before rendering.
 
 ```

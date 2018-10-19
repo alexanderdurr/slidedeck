@@ -32,9 +32,9 @@ Topic :: Internet :: WWW/HTTP
 setup(
     name='slidedeck',
     version='0.14',
-    author='Robert McGibbon',
+    author='Robert McGibbon, Martin Isaksson',
     author_email='rmcgibbo@gmail.com',
-    url='https://github.com/rmcgibbo/slidedeck',
+    url='https://github.com/martisak/slidedeck',
     description=DOCLINES[0],
     long_description="\n".join(DOCLINES[2:]),
     classifiers = CLASSIFIERS.splitlines(),
