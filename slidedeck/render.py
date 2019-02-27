@@ -9,6 +9,8 @@ import jinja2
 import markdown
 from slidedeck.mdx_mathjax import MathJaxExtension
 from slidedeck.mdx_bibtex import BibtexExtension
+import git
+import datetime
 
 #############################################################################
 # Globals
@@ -31,7 +33,8 @@ DECK_SETTINGS_RE = {
     'author': u'^%\s*author:\s*(.*)$',
     'contact': u'^%\s*contact:\s*(.*)$',
     'favicon': u'^%\s*favicon:\s*(.*)$',
-    'bibliography': u'^%\s*bibliography:\s*(.*)$'
+    'bibliography': u'^%\s*bibliography:\s*(.*)$',
+    'footer': u'^%\s*footer:([^#\n]*).*$'
 }
 
 #############################################################################
@@ -97,6 +100,46 @@ def process_slides(markdown_fn, output_fn, template_fn):
     write_slides(slides, output_fn)
 
 
+def parse_footer(settings_footer):
+    """
+    This function takes a string, splits it per line
+    and parses each line.
+
+    Keywords 'git-hash' and 'git-date' is replaced with
+    branch commit and commit date for the latest commit.
+    """
+
+    footer = settings_footer.split("<br/>")
+
+    try:
+        repo = git.Repo(search_parent_directories=True)
+    except git.exc.InvalidGitRepositoryError:
+        print("Warning: Not a valid git repository.")
+    else:
+        master = repo.active_branch
+
+        for i, f in enumerate(footer):
+
+            if f.strip().startswith("git-hash"):
+                sha = repo.head.object.hexsha
+                short_sha = repo.git.rev_parse(sha, short=1)
+
+                if repo.tags and (repo.tags[0].commit == master.commit):
+                    latest = repo.tags[0]
+                else:
+                    latest = short_sha
+
+                footer[i] = "{} {}".format(master.name, latest)
+
+            if f.strip().startswith("git-date"):
+                latest_commit = datetime.datetime.fromtimestamp(
+                    master.commit.committed_date)
+
+                footer[i] = latest_commit.strftime('%Y-%m-%d')
+
+    return " | ".join(footer) + " | "
+
+
 def parse_deck_settings(md):
     """Parse global settings for the slide deck, such as the author and
     contact information.
@@ -122,7 +165,8 @@ def parse_deck_settings(md):
         while found:
             m = re.search(value, md, re.MULTILINE)
             if m:
-                settings[key].append(m.group(1))
+                tmp = m.group(1)
+                settings[key].append(tmp.strip())
                 md = md.replace(m.group(0), '')
             else:
                 found = False
@@ -130,6 +174,9 @@ def parse_deck_settings(md):
     # if a setting is repeated, we join them together with a <br/> tag
     # in between.
     settings = {k: '<br/>'.join(v) for k, v in settings.items()}
+
+    if 'footer' in settings.keys():
+        settings['footer'] = parse_footer(settings['footer'])
 
     print("Parsed slide deck settings, and found setting for: {:s}.".format(
         ', '.join(settings.keys())))

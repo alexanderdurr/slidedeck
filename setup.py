@@ -4,7 +4,10 @@ This is a repackaging of the google io 2012 slidedeck,
 to be a little easier to use and more suitable for scientific
 presentations.
 
-Example slides: http://cdn.rawgit.com/rmcgibbo/slidedeck-example/master/index.html
+This is a fork of the excellent work of @rmcgibbo.
+
+Example slides:
+http://cdn.rawgit.com/rmcgibbo/slidedeck-example/master/index.html
 
 You edit and author your entire presentation in markdown. All the metadata
 about your presentation is set within the markdown file, including things
@@ -31,9 +34,9 @@ Topic :: Internet :: WWW/HTTP
 
 setup(
     name='slidedeck',
-    version='0.14',
-    author='Robert McGibbon, Martin Isaksson',
-    author_email='rmcgibbo@gmail.com',
+    version='0.15',
+    author='Martin Isaksson',
+    author_email='martin.isaksson@gmail.com',
     url='https://github.com/martisak/slidedeck',
     description=DOCLINES[0],
     long_description="\n".join(DOCLINES[2:]),
@@ -54,5 +57,6 @@ setup(
         'wasp/figures/*'
     ]},
     zip_safe=False,
-    install_requires=['jinja2', 'markdown', 'watchdog', 'bibtexparser', 'six'],
+    install_requires=['jinja2', 'markdown', 'watchdog',
+                      'bibtexparser', 'six', 'gitpython'],
 )
