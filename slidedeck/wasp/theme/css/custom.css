@@ -103,7 +103,7 @@ slide:not(.segue) {
     background-image: url(../../figures/wasp_bg.svg);
     background-repeat: repeat-x;
     background-position-y: 100%;
-    background-size: 10% 10%;
+    background-size: 100% 10%;
 }
 
 
