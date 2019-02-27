@@ -116,7 +116,10 @@ def parse_footer(settings_footer):
     except git.exc.InvalidGitRepositoryError:
         print("Warning: Not a valid git repository.")
     else:
-        master = repo.active_branch
+        if not repo.head.is_detached:
+            master = repo.active_branch
+        else:
+            master = repo.head
 
         for i, f in enumerate(footer):
 
