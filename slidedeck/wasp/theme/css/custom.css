@@ -293,7 +293,7 @@ table:not(.dashed) tbody > tr:hover td {
 }
 
 article.columns-2 pre {
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 10px;
 }
 
 slides footer.source > ul {
