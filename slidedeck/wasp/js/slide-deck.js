@@ -118,6 +118,8 @@ SlideDeck.prototype.addEventListeners_ = function() {
   document.addEventListener('keydown', this.onBodyKeyDown_.bind(this), false);
   window.addEventListener('popstate', this.onPopState_.bind(this), false);
 
+  document.addEventListener('touchstart', this.handleTouchStart.bind(this), false);
+  document.addEventListener('touchmove', this.handleTouchMove.bind(this), false);
   // var transEndEventNames = {
   //   'WebkitTransition': 'webkitTransitionEnd',
   //   'MozTransition': 'transitionend',
@@ -125,11 +127,11 @@ SlideDeck.prototype.addEventListeners_ = function() {
   //   'msTransition': 'MSTransitionEnd',
   //   'transition': 'transitionend'
   // };
-  // 
+  //
   // // Find the correct transitionEnd vendor prefix.
   // window.transEndEventName = transEndEventNames[
   //     Modernizr.prefixed('transition')];
-  // 
+  //
   // // When slides are done transitioning, kickoff loading iframes.
   // // Note: we're only looking at a single transition (on the slide). This
   // // doesn't include autobuilds the slides may have. Also, if the slide
@@ -160,6 +162,57 @@ SlideDeck.prototype.onPopState_ = function(e) {
 };
 
 /**
+ * @param {Event} evt
+ */
+ function getTouches(evt) {
+  return evt.touches ||             // browser API
+         evt.originalEvent.touches; // jQuery
+}
+
+/**
+ * @param {Event} evt
+ */
+SlideDeck.prototype.handleTouchStart = function(evt) {
+    const firstTouch = getTouches(evt)[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+};
+
+/**
+ * @param {Event} evt
+ */
+SlideDeck.prototype.handleTouchMove = function(evt) {
+    if ( ! xDown || ! yDown ) {
+        return;
+    }
+
+    var xUp = evt.touches[0].clientX;
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+        if ( xDiff < 0 ) {
+            this.prevSlide();
+            evt.preventDefault();
+        } else {
+            this.nextSlide();
+            evt.preventDefault();
+        }
+    } else {
+        if ( yDiff > 0 ) {
+            /* up swipe */
+        } else {
+            /* down swipe */
+        }
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;
+};
+
+/**
  * @param {Event} e
  */
 SlideDeck.prototype.onBodyKeyDown_ = function(e) {
@@ -167,7 +220,7 @@ SlideDeck.prototype.onBodyKeyDown_ = function(e) {
       e.target.isContentEditable) {
     return;
   }
-  
+
   MathJax.Hub.Queue(["Rerender",MathJax.Hub]);
   console.log('redraw');
 
@@ -289,7 +342,7 @@ SlideDeck.prototype.loadConfig_ = function(config) {
       'Open Sans:regular,semibold,italic,italicsemibold',
       'Source Code Pro'
    ];
-  
+
 
   this.loadTheme_([]);
 
@@ -300,7 +353,7 @@ SlideDeck.prototype.loadConfig_ = function(config) {
   prettyPrint();
   this.makeBuildLists_();
   this.addFonts_(fonts);
-  
+
   /* Left/Right tap areas. Default to including. */
   var el = document.createElement('div');
   el.classList.add('slide-area');
@@ -486,7 +539,7 @@ SlideDeck.prototype.updateSlides_ = function(opt_dontPush) {
   this.triggerSlideEvent('slideenter', curSlide);
 
 // window.setTimeout(this.disableSlideFrames_.bind(this, curSlide - 2), 301);
-// 
+//
 // this.enableSlideFrames_(curSlide - 1); // Previous slide.
 // this.enableSlideFrames_(curSlide + 1); // Current slide.
 // this.enableSlideFrames_(curSlide + 2); // Next slide.
