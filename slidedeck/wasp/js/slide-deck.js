@@ -10,6 +10,7 @@ document.cancelFullScreen = document.webkitCancelFullScreen ||
  * @constructor
  */
 function SlideDeck(el) {
+  "use strict";
   this.curSlide_ = 0;
   this.prevSlide_ = 0;
   this.config_ = null;
@@ -65,7 +66,8 @@ SlideDeck.prototype.loadSlide = function(slideNo) {
 SlideDeck.prototype.onDomLoaded_ = function(e) {
   document.body.classList.add('loaded'); // Add loaded class for templates to use.
 
-  this.slides = this.container.querySelectorAll('slide:not([hidden]):not(.backdrop)');
+  this.slides = this.container.querySelectorAll(
+    'slide:not([hidden]):not(.backdrop)');
 
   // If we're on a smartphone, apply special sauce.
   if (Modernizr.mq('only screen and (max-device-width: 480px)')) {
@@ -82,6 +84,9 @@ SlideDeck.prototype.onDomLoaded_ = function(e) {
   this.loadConfig_();
   this.addEventListeners_();
   this.updateSlides_();
+
+  this.slideElastic_();
+  window.addEventListener('resize', this.slideElastic_.bind(this), false);
 
   // Add slide numbers and total slide count metadata to each slide.
   var that = this;
@@ -109,6 +114,8 @@ SlideDeck.prototype.onDomLoaded_ = function(e) {
       document.body.classList.add('popup');
     }
   }
+
+
 };
 
 /**
@@ -294,13 +301,15 @@ SlideDeck.prototype.onBodyKeyDown_ = function(e) {
        // Also, ignore browser's fullscreen shortcut (cmd+shift+f) so we don't
        // get trapped in fullscreen!
       if (e.target == document.body && !(e.shiftKey && e.metaKey)) {
-        if (document.mozFullScreen !== undefined && !document.mozFullScreen) {
-          document.body.mozRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-        } else if (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen) {
-          document.body.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-        } else {
-          document.cancelFullScreen();
-        }
+        // if (document.mozFullScreen !== undefined && !document.mozFullScreen) {
+        //   document.body.mozRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        // } else if (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen) {
+        //   document.body.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        // } else {
+        //   document.cancelFullScreen();
+        // }
+        this.removeCanvas();
+        this.toggeFullScreen();
       }
       break;
 
@@ -311,6 +320,8 @@ SlideDeck.prototype.onBodyKeyDown_ = function(e) {
       }
       break;
   }
+
+  this.slideElastic_()
 };
 
 /**
@@ -328,10 +339,62 @@ SlideDeck.prototype.focusOverview_ = function() {
 
 /**
  */
+SlideDeck.prototype.toggeFullScreen = function() {
+  if (!document.fullscreenElement && // alternative standard method
+    !document.mozFullScreenElement && !document.webkitFullscreenElement && !
+    document.msFullscreenElement) { // current working methods
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    }
+  } else {
+    this.exitFullScreen();
+  }
+
+  this.slideElastic_()
+};
+
+/**
+ */
+SlideDeck.prototype.exitFullScreen = function() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+};
+
+/**
+ */
 SlideDeck.prototype.toggleOverview = function() {
   document.body.classList.toggle('overview');
 
   this.focusOverview_();
+};
+
+/**
+ */
+SlideDeck.prototype.removeCanvas = function() {
+  var canvasContainer = document.getElementById('canvasContainer');
+  if (canvasContainer) {
+    canvasContainer.removeEventListener('mousedown', this.handleMouseCanvas_,
+      false);
+    canvasContainer.removeEventListener('mousemove', this.handleMouseCanvas_,
+      false);
+    document.removeEventListener('mouseup', this.handleMouseCanvas_, false);
+    document.removeEventListener('onkeydown', this.onKeyDownCanvas_, false);
+    document.removeEventListener('onkeyup', this.onKeyUpCanvas_, false);
+    canvasContainer.parentNode.removeChild(canvasContainer);
+  }
 };
 
 /**
@@ -621,6 +684,38 @@ SlideDeck.prototype.getSlideEl_ = function(no) {
   } else {
     return this.slides[no];
   }
+};
+
+/**
+ * @private
+ */
+SlideDeck.prototype.slideElastic_ = function() {
+
+  var style = window.getComputedStyle(this.slides[0], null),
+    minWidth = parseInt(style.getPropertyValue('width'), 10),
+    minHeight = parseInt(style.getPropertyValue('height'), 10),
+    sx = window.innerWidth / minWidth,
+    sy = window.innerHeight / minHeight,
+    transform;
+
+  //If not in fullscreen, add some margins
+  if (!document.fullscreenElement && !document.mozFullScreenElement &&
+    !document.webkitFullscreenElement && !document.msFullscreenElement) {
+    sx = sx * 0.98;
+    sy = sy * 0.98;
+    console.log('elastic1');
+  }
+
+  transform = 'scale(' + Math.min(sx, sy) + ',' + Math.min(sx, sy) + ')';
+  this.container.style.MozTransform = transform;
+  this.container.style.WebkitTransform = transform;
+  this.container.style.OTransform = transform;
+  this.container.style.msTransform = transform;
+  this.container.style.transform = transform;
+
+  console.log(transform);
+  console.log(this.container)
+
 };
 
 /**
