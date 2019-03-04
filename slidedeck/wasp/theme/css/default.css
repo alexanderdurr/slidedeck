@@ -110,10 +110,10 @@ slides > slide[hidden] {
 
 /* line 87, ../scss/_base.scss */
 slides {
-  width: 940px;
-  height: 740px;
-  margin-left: -470px;
-  margin-top: -370px;
+  width: 900px;
+  height: 700px;
+  margin-left: -450px;
+  margin-top: -350px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -135,8 +135,8 @@ slides {
 }
 /* line 100, ../scss/_base.scss */
 slides.layout-widescreen, slides.layout-faux-widescreen {
-  width: 1140px;
-  margin-left: -570px;
+  width: 1100px;
+  margin-left: -550px;
 }
 
 /* line 107, ../scss/_base.scss */
