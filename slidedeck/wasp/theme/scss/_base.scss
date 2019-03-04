@@ -12,7 +12,7 @@
 $slide-width: 900px;
 $slide-height: 700px;
 $slide-width-widescreen: 1100px;
-$slide-margin: 20px;
+$slide-margin: 0px;
 
 @mixin font-smoothing($val: antialiased) {
   -webkit-font-smoothing: $val;
@@ -96,7 +96,7 @@ slides {
   @include perspective(1000);
   @include transform-style(preserve-3d);
   @include transition(opacity 800ms ease-in 100ms); // Add small delay to prevent jank.
-  
+
   &.layout-widescreen,
   &.layout-faux-widescreen {
 	  width: ($slide-width-widescreen+2*$slide-margin);
