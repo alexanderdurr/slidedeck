@@ -121,6 +121,14 @@ def parse_footer(settings_footer):
         else:
             master = repo.head
 
+        current_branch = str(master.name)
+
+        for branch in repo.branches:
+            for commit in repo.iter_commits(branch):
+                if commit == master.commit:
+                    current_branch = branch
+                    break
+
         for i, f in enumerate(footer):
 
             if f.strip().startswith("git-hash"):
@@ -132,7 +140,7 @@ def parse_footer(settings_footer):
                 else:
                     latest = short_sha
 
-                footer[i] = "{} {}".format(master.name, latest)
+                footer[i] = "{} {}".format(current_branch, latest)
 
             if f.strip().startswith("git-date"):
                 latest_commit = datetime.datetime.fromtimestamp(
